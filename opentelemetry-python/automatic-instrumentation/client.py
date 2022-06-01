@@ -26,7 +26,7 @@ with tracer.start_as_current_span("client"):
         headers = {}
         inject(headers)
         requested = get(
-            "http://localhost:8082/server_request",
+            "http://localhost:4082/server_request",
             params={"param": argv[1]},
             headers=headers,
         )

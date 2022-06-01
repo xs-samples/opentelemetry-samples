@@ -4,7 +4,7 @@ from sys import argv
 assert len(argv) == 2
 
 requested = get(
-    "http://java-end:8081/greeting",
+    "http://java-end:4081/greeting",
     params={"param": argv[1]},
 )
 

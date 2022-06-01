@@ -52,7 +52,6 @@
         </dependency>
     </dependencies>
 
-
     <build>
         <finalName>application</finalName>
         <plugins>
@@ -62,7 +61,7 @@
                 <configuration>
                     <fork>true</fork>
                     <skip>false</skip>
-                    <mainClass>xs.opentelemetry.python.java.sample.Application</mainClass>
+                    <mainClass>com.xs.opentelemetry.python.java.sample.Application</mainClass>
                     <outputDirectory>docker/java</outputDirectory>
                 </configuration>
             </plugin>

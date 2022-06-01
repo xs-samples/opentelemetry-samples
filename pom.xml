@@ -59,5 +59,6 @@
     <modules>
         <module>opentelemetry-python</module>
         <module>opentelemetry-python-java</module>
+        <module>opentelemetry-java-nginx-python</module>
     </modules>
 </project>
