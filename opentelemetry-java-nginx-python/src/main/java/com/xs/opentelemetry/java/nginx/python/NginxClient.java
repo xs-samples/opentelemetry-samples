@@ -3,10 +3,11 @@ package com.xs.opentelemetry.java.nginx.python;
 import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -41,14 +42,12 @@ public class NginxClient {
         String url = providerUrl + param;
         log.info("Getting from {}", url);
 //获得http客户端
-        CloseableHttpClient client = HttpClientBuilder.create().build();
-        //创建get请求
-        HttpGet httpGet = new HttpGet(url);
+        HttpUriRequest request = new HttpGet(url);
+        HttpClient client = new DefaultHttpClient();
         //响应模型
-        CloseableHttpResponse response = null;
+        HttpResponse response;
         try {
-            //有客户端指定get请求
-            response = client.execute(httpGet);
+            response = client.execute(request);
             //从响应模型中获取响应体
             HttpEntity responseEntity = response.getEntity();
             EntityUtils.toString(responseEntity);
@@ -61,18 +60,6 @@ public class NginxClient {
             log.info("Got {}", s);
         } catch (IOException e) {
             log.error("error:", e);
-        } finally {
-            try {
-                //释放资源
-                if (client != null) {
-                    client.close();
-                }
-                if (response != null) {
-                    response.close();
-                }
-            } catch (IOException e) {
-                log.error("error:", e);
-            }
         }
         return s;
     }
