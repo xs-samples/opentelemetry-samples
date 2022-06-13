@@ -39,6 +39,8 @@ public class NginxService {
     public String doSomeThing(String param) {
         log.info("Getting for {}", param);
         String result = this.nginxClient.get(param);
+
+        this.nginxClient.post();
         doSomeWorkNewSpan();
         return result;
     }
